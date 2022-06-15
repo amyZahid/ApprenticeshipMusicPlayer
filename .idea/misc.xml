@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Amy/Documents/Sainsburys/Apprenticeship/MusicPlayer/app/src/main/res/drawable/icon_player_play.xml" value="0.239" />
+        <entry key="..\:/Users/Amy/Documents/Sainsburys/Apprenticeship/MusicPlayer/app/src/main/res/drawable/shape_search_border.xml" value="0.3435" />
+        <entry key="..\:/Users/Amy/Documents/Sainsburys/Apprenticeship/MusicPlayer/app/src/main/res/drawable/shape_search_button.xml" value="0.3625" />
+        <entry key="..\:/Users/Amy/Documents/Sainsburys/Apprenticeship/MusicPlayer/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/Amy/Documents/Sainsburys/Apprenticeship/MusicPlayer/app/src/main/res/layout/bottom_navigation_fragment.xml" value="0.5229166666666667" />
+        <entry key="..\:/Users/Amy/Documents/Sainsburys/Apprenticeship/MusicPlayer/app/src/main/res/layout/card_up_next.xml" value="0.5192708333333333" />
+        <entry key="..\:/Users/Amy/Documents/Sainsburys/Apprenticeship/MusicPlayer/app/src/main/res/layout/fragment_music_layout.xml" value="0.33" />
+        <entry key="..\:/Users/Amy/Documents/Sainsburys/Apprenticeship/MusicPlayer/app/src/main/res/layout/fragment_play_layout.xml" value="0.5" />
+        <entry key="..\:/Users/Amy/Documents/Sainsburys/Apprenticeship/MusicPlayer/app/src/main/res/layout/fragment_search_layout.xml" value="0.2828125" />
+        <entry key="..\:/Users/Amy/Documents/Sainsburys/Apprenticeship/MusicPlayer/app/src/main/res/layout/fragment_song.xml" value="0.2490740740740741" />
+        <entry key="..\:/Users/Amy/Documents/Sainsburys/Apprenticeship/MusicPlayer/app/src/main/res/layout/list_item_playlist.xml" value="0.5192708333333333" />
+        <entry key="..\:/Users/Amy/Documents/Sainsburys/Apprenticeship/MusicPlayer/app/src/main/res/layout/list_item_recent_searches.xml" value="0.5192708333333333" />
+        <entry key="..\:/Users/Amy/Documents/Sainsburys/Apprenticeship/MusicPlayer/app/src/main/res/layout/list_item_song.xml" value="0.5192708333333333" />
+        <entry key="..\:/Users/Amy/Documents/Sainsburys/Apprenticeship/MusicPlayer/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.5229166666666667" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

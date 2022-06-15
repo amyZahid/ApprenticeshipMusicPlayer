@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_grey">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/songAlbumCoverImage"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/background_black"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/songInfoCard">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/srgt_pepper_practice"
+            android:scaleType="centerCrop"/>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/songInfoCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="10dp"
+        app:cardBackgroundColor="@color/background_black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/songNameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_white"
+                android:text="When I'm 64"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <ImageView
+                android:id="@+id/shuffleIcon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/icon_player_shuffle"
+                android:clickable="true"
+                app:tint="@color/text_white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/songNameTextView"
+                app:layout_constraintBottom_toBottomOf="@id/songNameTextView"/>
+
+            <TextView
+                android:id="@+id/songArtistTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_white"
+                android:textSize="20sp"
+                android:text="The Beatles"
+                app:layout_constraintTop_toBottomOf="@id/songNameTextView"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/songAlbumTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/text_white"
+                android:textSize="20sp"
+                android:text="St Peppers Lovely Hearts Club Band"
+                app:layout_constraintTop_toBottomOf="@id/songArtistTextView"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <ImageView
+                android:id="@+id/previousIcon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/icon_player_previous"
+                android:clickable="true"
+                app:tint="@color/text_white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/playPauseArea"
+                app:layout_constraintBottom_toBottomOf="@id/playPauseArea"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/playPauseArea"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="20dp"
+                app:layout_constraintStart_toEndOf="@id/previousIcon"
+                app:layout_constraintEnd_toStartOf="@id/nextIcon"
+                app:layout_constraintTop_toBottomOf="@id/songAlbumTextView"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <ImageView
+                    android:id="@+id/playIcon"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/icon_player_play"
+                    app:tint="@color/text_white"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <ImageView
+                    android:id="@+id/pauseIcon"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/icon_player_pause"
+                    android:visibility="invisible"
+                    app:tint="@color/text_white"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <ImageView
+                android:id="@+id/nextIcon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/icon_player_next"
+                android:clickable="true"
+                app:tint="@color/text_white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/songAlbumTextView"
+                app:layout_constraintTop_toTopOf="@id/playPauseArea"
+                app:layout_constraintBottom_toBottomOf="@id/playPauseArea"/>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
