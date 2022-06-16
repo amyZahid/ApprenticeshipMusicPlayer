@@ -88,14 +88,14 @@ class PlayFragment : Fragment() {
         nextIcon.setOnClickListener {
             val nextSongCounter = songListViewModel.currentSongCounter + 1
             songListViewModel.currentSongCounter = nextSongCounter
-            songListViewModel.currentSong.value = songListViewModel.songListLiveData.value!![nextSongCounter]
+            songListViewModel.currentSong.value = songListViewModel.queuedSongsLiveData.value!![nextSongCounter]
         }
 
         previousIcon.setOnClickListener {
             val previousSongCounter = songListViewModel.currentSongCounter - 1
             if (previousSongCounter >= 0 ) {
                 songListViewModel.currentSong.value =
-                    songListViewModel.songListLiveData.value!![previousSongCounter]
+                    songListViewModel.queuedSongsLiveData.value!![previousSongCounter]
                 songListViewModel.currentSongCounter = previousSongCounter
             }
             else {

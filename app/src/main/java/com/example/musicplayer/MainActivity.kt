@@ -89,15 +89,15 @@ class MainActivity : AppCompatActivity() {
         upNextPlayNextIcon.setOnClickListener {
             val nextSongCounter = songListViewModel.currentSongCounter + 1
             songListViewModel.currentSongCounter = nextSongCounter
-            songListViewModel.currentSong.value = songListViewModel.songListLiveData.value!![nextSongCounter]
+            songListViewModel.currentSong.value = songListViewModel.queuedSongsLiveData.value!![nextSongCounter]
 
         }
 
         songListViewModel.currentSong.observe(this
         ) {
             val nextSongCounter = songListViewModel.currentSongCounter + 1
-            val nextSong = songListViewModel.songListLiveData.value?.get(nextSongCounter)?.songName
-            upNextSongTitle.text = nextSong ?: "No song found"
+            val nextSong = songListViewModel.queuedSongsLiveData.value?.get(nextSongCounter)?.songName
+            upNextSongTitle.text = nextSong ?: "no song found"
             newCurrentSong(it)
 
         }
