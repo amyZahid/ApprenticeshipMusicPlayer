@@ -46,14 +46,17 @@
 
             <TextView
                 android:id="@+id/songNameTextView"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/text_white"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:text="When I'm 64"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/shuffleIcon"/>
 
             <ImageView
                 android:id="@+id/shuffleIcon"
@@ -68,24 +71,30 @@
 
             <TextView
                 android:id="@+id/songArtistTextView"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:textColor="@color/text_white"
                 android:textSize="20sp"
                 android:text="The Beatles"
                 app:layout_constraintTop_toBottomOf="@id/songNameTextView"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/shuffleIcon"/>
 
             <TextView
                 android:id="@+id/songAlbumTextView"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:textColor="@color/text_white"
                 android:textSize="20sp"
                 android:text="St Peppers Lovely Hearts Club Band"
                 app:layout_constraintTop_toBottomOf="@id/songArtistTextView"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/shuffleIcon"/>
 
             <ImageView
                 android:id="@+id/previousIcon"

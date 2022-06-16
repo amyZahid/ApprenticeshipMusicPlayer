@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Amy/Documents/Sainsburys/Apprenticeship/AppMusicPlayer/app/src/main/res/layout/activity_main.xml" value="0.5192708333333333" />
+        <entry key="..\:/Users/Amy/Documents/Sainsburys/Apprenticeship/AppMusicPlayer/app/src/main/res/layout/card_up_next.xml" value="0.5192708333333333" />
+        <entry key="..\:/Users/Amy/Documents/Sainsburys/Apprenticeship/AppMusicPlayer/app/src/main/res/layout/fragment_play_layout.xml" value="0.43148148148148147" />
         <entry key="..\:/Users/Amy/Documents/Sainsburys/Apprenticeship/MusicPlayer/app/src/main/res/drawable/icon_player_play.xml" value="0.239" />
         <entry key="..\:/Users/Amy/Documents/Sainsburys/Apprenticeship/MusicPlayer/app/src/main/res/drawable/shape_search_border.xml" value="0.3435" />
         <entry key="..\:/Users/Amy/Documents/Sainsburys/Apprenticeship/MusicPlayer/app/src/main/res/drawable/shape_search_button.xml" value="0.3625" />

@@ -9,8 +9,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class MusicListAdapter(private val musicItemsList: ArrayList<AudioModel>?)
-    : RecyclerView.Adapter<MusicListAdapter.ViewHolder>() {
+class MusicListAdapter(private val musicItemsList: ArrayList<AudioModel>, private val clickListener: (Int) -> Unit) : RecyclerView.Adapter<MusicListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -21,16 +20,17 @@ class MusicListAdapter(private val musicItemsList: ArrayList<AudioModel>?)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val songItemViewModel = musicItemsList?.get(position)
+        val songItemViewModel = musicItemsList[position]
 
-        if (songItemViewModel != null) {
-            holder.songTitleTextView.text = songItemViewModel.songName
-            holder.songArtistTextView.text = songItemViewModel.songArtist
+        holder.songTitleTextView.text = songItemViewModel.songName
+        holder.songArtistTextView.text = songItemViewModel.songArtist
+        holder.playSongClickableArea.setOnClickListener {
+            clickListener(position)
         }
     }
 
     override fun getItemCount(): Int {
-        return musicItemsList?.size ?: 0
+        return musicItemsList.size ?: 0
     }
 
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {

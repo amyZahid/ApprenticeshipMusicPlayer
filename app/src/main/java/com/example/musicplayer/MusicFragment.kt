@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -17,11 +18,10 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 class MusicFragment : Fragment() {
 
     private var sortedByOption : Int = 0
-    private var mediaPlayer : MediaPlayer? = null
+    private val songListViewModel : SongListViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -30,12 +30,10 @@ class MusicFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_music_layout, container, false)
 
-        val musicItemsList: ArrayList<AudioModel>? =
-            requireArguments().getSerializable("bundle_key") as ArrayList<AudioModel>?
+        val musicItemsList: ArrayList<AudioModel>? = songListViewModel.songListLiveData.value
 
         val sortSongsIcon = view.findViewById<ImageView>(R.id.sortSongsIcon)
         val noSongsTextView = view.findViewById<TextView>(R.id.noSongsTextView)
-        val songListView = view.findViewById<RecyclerView>(R.id.songListView)
 
         if (musicItemsList != null) {
             displayMusic(view, musicItemsList)
@@ -52,7 +50,7 @@ class MusicFragment : Fragment() {
 
     private fun displayMusic(view: View, musicList: ArrayList<AudioModel>) {
         val noSongsTextView = view.findViewById<TextView>(R.id.noSongsTextView)
-        val songListView = view.findViewById<RecyclerView>(R.id.songListView)
+        val songListView =  view.findViewById<RecyclerView>(R.id.songListView)
 
         songListView.layoutManager = LinearLayoutManager(context)
         if (sortedByOption == 0) {
@@ -61,12 +59,18 @@ class MusicFragment : Fragment() {
             musicList.sortWith(compareBy { it.songArtist })
         }
 
+        songListViewModel.updateSongList(musicList)
+
         if (musicList.size > 0) {
-            val adapter = MusicListAdapter(musicList)
+            val adapter = MusicListAdapter(musicList) {
+                songListViewModel.currentSong.value = musicList[it]
+                songListViewModel.queuedSongsLiveData.value = getQueuedSongs(it, musicList)
+            }
             songListView.isVisible = true
             songListView.adapter = adapter
             noSongsTextView.isVisible = false
         }
+
 
     }
 
@@ -87,5 +91,16 @@ class MusicFragment : Fragment() {
                 }
                 .show()
         }
+    }
+
+    private fun getQueuedSongs(currentSongPosition : Int, musicItemsList : ArrayList<AudioModel>)
+        : ArrayList<AudioModel>
+    {
+        var queuedSongsList : ArrayList<AudioModel> = ArrayList()
+
+        for (i in (currentSongPosition+1) until musicItemsList.size) {
+            queuedSongsList.add(musicItemsList[i])
+        }
+        return queuedSongsList
     }
 }
