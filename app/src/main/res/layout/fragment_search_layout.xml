@@ -39,10 +39,11 @@
         app:layout_constraintBottom_toBottomOf="@id/searchAutoCompleteTextView"/>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/recentSearchesCardView"
+        android:id="@+id/searchResultsCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:visibility="gone"
         app:cardBackgroundColor="@color/background_black"
         app:cardCornerRadius="5dp"
         app:cardElevation="10dp"
@@ -51,16 +52,16 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/recentSearchesViewArea"
+            android:id="@+id/searchResultsViewArea"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp">
 
         <TextView
-            android:id="@+id/recentSearchesTitleTextView"
+            android:id="@+id/searchResultsTitleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Recent Searches"
+            android:text="Search Results"
             android:textSize="30sp"
             android:textColor="@color/highlight_purple"
             android:textStyle="bold"
@@ -68,26 +69,23 @@
             app:layout_constraintStart_toStartOf="parent"/>
 
             <TextView
-                android:id="@+id/noSongsTextView"
-                android:layout_width="match_parent"
+                android:id="@+id/noResultsFoundTextView"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="It looks like you haven't searched anything recently!!"
+                android:text="No search results found"
+                android:textSize="20sp"
                 android:textColor="@color/text_white"
-                android:textSize="20dp"
-                android:textAlignment="center"
-                app:layout_constraintTop_toBottomOf="@id/recentSearchesTitleTextView"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
-
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/searchResultsTitleTextView"
+                app:layout_constraintStart_toStartOf="parent"/>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/playlistListView"
+            android:id="@+id/resultsListView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@id/recentSearchesTitleTextView"
+            app:layout_constraintTop_toBottomOf="@id/searchResultsTitleTextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:listitem="@layout/list_item_recent_searches" />

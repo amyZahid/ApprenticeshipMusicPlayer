@@ -52,6 +52,7 @@ class MusicFragment : Fragment() {
         val songListView =  view.findViewById<RecyclerView>(R.id.songListView)
 
         songListView.layoutManager = LinearLayoutManager(context)
+
         if (sortedByOption == 0) {
             musicList.sortWith(compareBy { it.songName })
         } else {
