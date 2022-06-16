@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
 
         songListViewModel.isPlaying.value = false
 
-        var songList : ArrayList<AudioModel> = ArrayList()
+        val songList : ArrayList<AudioModel> = ArrayList()
 
         val projection = arrayOf(
             MediaStore.Audio.Media.TITLE,
@@ -87,8 +87,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         upNextPlayNextIcon.setOnClickListener {
-            songListViewModel.currentSong.value = songListViewModel.queuedSongsLiveData.value!![0]
-            songListViewModel.queuedSongsLiveData.value!!.removeFirst()
+            val nextSongCounter = songListViewModel.currentSongCounter + 1
+            songListViewModel.currentSong.value = songListViewModel.queuedSongsLiveData.value!![nextSongCounter]
+            songListViewModel.currentSongCounter = nextSongCounter
         }
 
         songListViewModel.currentSong.observe(this

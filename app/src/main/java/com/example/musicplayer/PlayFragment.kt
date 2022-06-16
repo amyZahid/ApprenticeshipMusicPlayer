@@ -40,6 +40,7 @@ class PlayFragment : Fragment() {
             if (!shuffleActivated) {
                 shuffleActivated = true
                 shuffleIcon.setColorFilter(resources.getColor(R.color.highlight_purple))
+                //songListViewModel.queuedSongsLiveData.
             } else {
                 shuffleActivated = false
                 shuffleIcon.setColorFilter(resources.getColor(R.color.text_white))
@@ -79,13 +80,22 @@ class PlayFragment : Fragment() {
         }
 
         nextIcon.setOnClickListener {
-            songListViewModel.currentSong.value = songListViewModel.queuedSongsLiveData.value!![0]
-            songListViewModel.queuedSongsLiveData.value!!.removeFirst()
+            val nextSongCounter = songListViewModel.currentSongCounter + 1
+            songListViewModel.currentSong.value =
+                songListViewModel.queuedSongsLiveData.value!![nextSongCounter]
+            songListViewModel.currentSongCounter = nextSongCounter
         }
 
         previousIcon.setOnClickListener {
-            songListViewModel.currentSong.value = songListViewModel.previousSongsLiveData.value!![0]
-            songListViewModel.previousSongsLiveData.value!!.removeFirst()
+            val previousSongCounter = songListViewModel.currentSongCounter - 1
+            if (previousSongCounter >= 0 ) {
+                songListViewModel.currentSong.value =
+                    songListViewModel.queuedSongsLiveData.value!![previousSongCounter]
+                songListViewModel.currentSongCounter = previousSongCounter
+            }
+            else {
+                Toast.makeText(context, "No previous songs in queue", Toast.LENGTH_SHORT).show()
+            }
         }
 
 

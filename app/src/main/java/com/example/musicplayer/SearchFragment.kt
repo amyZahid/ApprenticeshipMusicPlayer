@@ -16,7 +16,11 @@ class SearchFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_search_layout, container, false)
+        val view = inflater.inflate(R.layout.fragment_search_layout, container, false)
+
+
+
+        return view
     }
 
 }
