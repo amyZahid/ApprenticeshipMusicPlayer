@@ -63,10 +63,11 @@ class MusicFragment : Fragment() {
 
         if (musicList.size > 0) {
             val adapter = MusicListAdapter(musicList) {
-                songListViewModel.currentSong.value = musicList[it]
-                songListViewModel.currentSongCounter = 0
                 songListViewModel.queuedSongsLiveData.value?.clear()
+                songListViewModel.currentSongCounter = 0
                 songListViewModel.queuedSongsLiveData.value = getQueuedSongs(it, musicList)
+                songListViewModel.currentSong.value = musicList[it]
+
             }
             songListView.isVisible = true
             songListView.adapter = adapter
