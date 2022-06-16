@@ -1,7 +1,6 @@
 package com.example.musicplayer
 
 
-import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -64,8 +63,8 @@ class MusicFragment : Fragment() {
         if (musicList.size > 0) {
             val adapter = MusicListAdapter(musicList) {
                 songListViewModel.queuedSongsLiveData.value?.clear()
-                songListViewModel.currentSongCounter = 0
-                songListViewModel.queuedSongsLiveData.value = getQueuedSongs(it, musicList)
+                songListViewModel.currentSongCounter = it
+                songListViewModel.queuedSongsLiveData.value = getQueuedSongs(musicList)
                 songListViewModel.currentSong.value = musicList[it]
 
             }
@@ -96,14 +95,9 @@ class MusicFragment : Fragment() {
         }
     }
 
-    private fun getQueuedSongs(currentSongPosition : Int, musicItemsList : ArrayList<AudioModel>)
-        : ArrayList<AudioModel>
-    {
-        var queuedSongsList : ArrayList<AudioModel> = ArrayList()
+    private fun getQueuedSongs(musicItemsList: ArrayList<AudioModel>)
+            : ArrayList<AudioModel> {
 
-        for (i in (currentSongPosition) until musicItemsList.size) {
-            queuedSongsList.add(musicItemsList[i])
-        }
-        return queuedSongsList
+        return musicItemsList
     }
 }
