@@ -33,16 +33,22 @@ class PlayFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_play_layout, container, false)
 
         val musicPlaying = songListViewModel.isPlaying
+        var shuffleActivated = songListViewModel.shuffleActivated
 
-        var shuffleActivated : Boolean = false
         val shuffleIcon = view.findViewById<ImageView>(R.id.shuffleIcon)
+
+        if (shuffleActivated) {
+            shuffleIcon.setColorFilter(resources.getColor(R.color.highlight_purple))
+        } else {
+            shuffleIcon.setColorFilter(resources.getColor(R.color.text_white))
+        }
+
         shuffleIcon.setOnClickListener {
             if (!shuffleActivated) {
-                shuffleActivated = true
+                songListViewModel.shuffleActivated = true
                 shuffleIcon.setColorFilter(resources.getColor(R.color.highlight_purple))
-                //songListViewModel.queuedSongsLiveData.
             } else {
-                shuffleActivated = false
+                songListViewModel.shuffleActivated = false
                 shuffleIcon.setColorFilter(resources.getColor(R.color.text_white))
             }
         }
@@ -96,12 +102,7 @@ class PlayFragment : Fragment() {
                 Toast.makeText(context, "No previous songs in queue", Toast.LENGTH_SHORT).show()
             }
         }
-
-
         return view
-
     }
-
-
 
 }

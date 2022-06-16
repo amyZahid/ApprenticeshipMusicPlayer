@@ -8,6 +8,7 @@ class SongListViewModel : ViewModel() {
     var currentSong = MutableLiveData<AudioModel>()
     var currentSongCounter : Int = 0
     var isPlaying = MutableLiveData<Boolean>()
+    var shuffleActivated : Boolean = false
     var shuffledQueue = MutableLiveData<ArrayList<AudioModel>>()
 
     fun updateSongList(songList : ArrayList<AudioModel>) {
