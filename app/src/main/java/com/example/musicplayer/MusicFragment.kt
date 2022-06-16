@@ -63,9 +63,7 @@ class MusicFragment : Fragment() {
 
         if (musicList.size > 0) {
             val adapter = MusicListAdapter(musicList) {
-                songListViewModel.queuedSongsLiveData.value?.clear()
-                songListViewModel.currentSongCounter = 0
-                songListViewModel.queuedSongsLiveData.value = getQueuedSongs(it, musicList)
+                songListViewModel.currentSongCounter = it
                 songListViewModel.currentSong.value = musicList[it]
 
             }
@@ -82,7 +80,7 @@ class MusicFragment : Fragment() {
 
         context?.let {
             MaterialAlertDialogBuilder(it)
-                .setTitle("List of Fruits")
+                .setTitle("Sort Songs By...")
                 .setSingleChoiceItems(sortMusicOptionsArray, sortedByOption) { dialog_, which ->
                     sortedByOption = which
                 }
@@ -94,16 +92,5 @@ class MusicFragment : Fragment() {
                 }
                 .show()
         }
-    }
-
-    private fun getQueuedSongs(currentSongPosition : Int, musicItemsList : ArrayList<AudioModel>)
-        : ArrayList<AudioModel>
-    {
-        var queuedSongsList : ArrayList<AudioModel> = ArrayList()
-
-        for (i in (currentSongPosition) until musicItemsList.size) {
-            queuedSongsList.add(musicItemsList[i])
-        }
-        return queuedSongsList
     }
 }

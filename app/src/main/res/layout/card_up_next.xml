@@ -39,6 +39,8 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/text_white"
                 android:text="No Songs Queued"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 app:layout_constraintTop_toBottomOf="@id/upNextTitleTextView"
