@@ -7,7 +7,9 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -19,7 +21,7 @@ import java.io.File
 class MainActivity : AppCompatActivity() {
 
     lateinit var mediaPlayer : MediaPlayer
-    lateinit var currentSong: AudioModel
+    private val songListViewModel : SongListViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +34,11 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-        var songList : ArrayList<AudioModel> = ArrayList()
+        mediaPlayer = MediaPlayer()
+
+        songListViewModel.isPlaying.value = false
+
+        val songList : ArrayList<AudioModel> = ArrayList()
 
         val projection = arrayOf(
             MediaStore.Audio.Media.TITLE,
@@ -49,17 +55,15 @@ class MainActivity : AppCompatActivity() {
             songList.add(songData)
         }
 
+        songListViewModel.updateSongList(songList)
+
         val musicFragment = MusicFragment()
         val playFragment = PlayFragment()
         val searchFragment = SearchFragment()
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         val upNextPlayNextIcon = findViewById<ImageView>(R.id.upNextPlayNextIcon)
-
-        val bundle = Bundle()
-
-        bundle.putSerializable("bundle_key", songList)
-        musicFragment.arguments = bundle
+        val upNextSongTitle = findViewById<TextView>(R.id.upNextSongTextView)
 
         setCurrentFragment(musicFragment)
 
@@ -83,9 +87,41 @@ class MainActivity : AppCompatActivity() {
         }
 
         upNextPlayNextIcon.setOnClickListener {
-            Toast.makeText(this, "Up Next Button Clicked", Toast.LENGTH_SHORT).show()
+            val nextSongCounter = songListViewModel.currentSongCounter + 1
+            val queuedSongsSize = songListViewModel.queuedSongsLiveData.value!!.size
+            if ((!songListViewModel.queuedSongsLiveData.value.isNullOrEmpty())&&( queuedSongsSize > nextSongCounter)){
+                songListViewModel.currentSongCounter = nextSongCounter
+                songListViewModel.currentSong.value = songListViewModel.queuedSongsLiveData.value!![songListViewModel.currentSongCounter]
+
+            } else {
+                Toast.makeText(this, "No songs queued", Toast.LENGTH_SHORT).show()
+            }
         }
 
+        songListViewModel.currentSong.observe(this
+        ) {
+            val queuedSongsSize = songListViewModel.queuedSongsLiveData.value!!.size
+            val nextSongCounter = songListViewModel.currentSongCounter + 1
+            if ((!songListViewModel.queuedSongsLiveData.value.isNullOrEmpty())&&( queuedSongsSize > nextSongCounter)){
+                val nextSong = songListViewModel.queuedSongsLiveData.value?.get(nextSongCounter)?.songName
+                upNextSongTitle.text = nextSong ?: "No song queued"
+            } else {
+                upNextSongTitle.text = "No songs queued"
+                Toast.makeText(this, "No songs queued", Toast.LENGTH_SHORT).show()
+            }
+            newCurrentSong(it)
+
+        }
+
+        songListViewModel.isPlaying.observe(this
+        ) {
+            if (!it) {
+                mediaPlayer.pause()
+            } else {
+                mediaPlayer.seekTo(mediaPlayer.currentPosition)
+                mediaPlayer.start()
+            }
+        }
 
     }
 
@@ -97,7 +133,6 @@ class MainActivity : AppCompatActivity() {
     private fun requestPermission(){
             Toast.makeText(this, "Read permission is required, please allow from settings", Toast.LENGTH_SHORT).show()
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 123)
-
     }
 
     private fun setCurrentFragment(fragment:Fragment) =
@@ -105,4 +140,15 @@ class MainActivity : AppCompatActivity() {
             replace(R.id.nav_host_fragment,fragment)
             commit()
         }
+
+    private fun newCurrentSong(currentSong: AudioModel) {
+        if(songListViewModel.isPlaying.value == true) {
+            mediaPlayer.stop()
+            mediaPlayer.release()
+        }
+        mediaPlayer = MediaPlayer.create(applicationContext, Uri.fromFile(File(currentSong.songPath)))
+        mediaPlayer.start()
+        songListViewModel.isPlaying.value = true
+    }
 }
+
