@@ -68,6 +68,8 @@ class SearchFragment : Fragment() {
                 if (songSearchResults.size > 0) {
 
                     val resultAdapter = SearchResultsListAdapter(songSearchResults) {
+                        songListViewModel.queuedSongsLiveData.value = songSearchResults
+                        songListViewModel.currentSongCounter = it
                         songListViewModel.currentSong.value = songSearchResults[it]
                     }
                     resultsListView.isVisible = true

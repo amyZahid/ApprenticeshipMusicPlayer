@@ -87,8 +87,14 @@ class PlayFragment : Fragment() {
 
         nextIcon.setOnClickListener {
             val nextSongCounter = songListViewModel.currentSongCounter + 1
-            songListViewModel.currentSongCounter = nextSongCounter
-            songListViewModel.currentSong.value = songListViewModel.queuedSongsLiveData.value!![nextSongCounter]
+            val queuedSongsSize = songListViewModel.queuedSongsLiveData.value!!.size
+            if ((!songListViewModel.queuedSongsLiveData.value.isNullOrEmpty())&&( queuedSongsSize > nextSongCounter)){
+                songListViewModel.currentSongCounter = nextSongCounter
+                songListViewModel.currentSong.value = songListViewModel.queuedSongsLiveData.value!![songListViewModel.currentSongCounter]
+
+            } else {
+                Toast.makeText(requireContext(), "No songs queued", Toast.LENGTH_SHORT).show()
+            }
         }
 
         previousIcon.setOnClickListener {

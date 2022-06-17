@@ -55,17 +55,16 @@ class MusicFragment : Fragment() {
 
         if (sortedByOption == 0) {
             musicList.sortWith(compareBy { it.songName })
+            songListViewModel.updateSongList(musicList)
         } else {
             musicList.sortWith(compareBy { it.songArtist })
+            songListViewModel.updateSongList(musicList)
         }
-
-        songListViewModel.updateSongList(musicList)
 
         if (musicList.size > 0) {
             val adapter = MusicListAdapter(musicList) {
-                songListViewModel.queuedSongsLiveData.value?.clear()
+                songListViewModel.queuedSongsLiveData.value = musicList
                 songListViewModel.currentSongCounter = it
-                songListViewModel.queuedSongsLiveData.value = getQueuedSongs(musicList)
                 songListViewModel.currentSong.value = musicList[it]
 
             }
@@ -94,11 +93,5 @@ class MusicFragment : Fragment() {
                 }
                 .show()
         }
-    }
-
-    private fun getQueuedSongs(musicItemsList: ArrayList<AudioModel>)
-            : ArrayList<AudioModel> {
-
-        return musicItemsList
     }
 }

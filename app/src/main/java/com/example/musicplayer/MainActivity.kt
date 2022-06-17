@@ -88,16 +88,27 @@ class MainActivity : AppCompatActivity() {
 
         upNextPlayNextIcon.setOnClickListener {
             val nextSongCounter = songListViewModel.currentSongCounter + 1
-            songListViewModel.currentSongCounter = nextSongCounter
-            songListViewModel.currentSong.value = songListViewModel.queuedSongsLiveData.value!![nextSongCounter]
+            val queuedSongsSize = songListViewModel.queuedSongsLiveData.value!!.size
+            if ((!songListViewModel.queuedSongsLiveData.value.isNullOrEmpty())&&( queuedSongsSize > nextSongCounter)){
+                songListViewModel.currentSongCounter = nextSongCounter
+                songListViewModel.currentSong.value = songListViewModel.queuedSongsLiveData.value!![songListViewModel.currentSongCounter]
 
+            } else {
+                Toast.makeText(this, "No songs queued", Toast.LENGTH_SHORT).show()
+            }
         }
 
         songListViewModel.currentSong.observe(this
         ) {
+            val queuedSongsSize = songListViewModel.queuedSongsLiveData.value!!.size
             val nextSongCounter = songListViewModel.currentSongCounter + 1
-            val nextSong = songListViewModel.queuedSongsLiveData.value?.get(nextSongCounter)?.songName
-            upNextSongTitle.text = nextSong ?: "no song found"
+            if ((!songListViewModel.queuedSongsLiveData.value.isNullOrEmpty())&&( queuedSongsSize > nextSongCounter)){
+                val nextSong = songListViewModel.queuedSongsLiveData.value?.get(nextSongCounter)?.songName
+                upNextSongTitle.text = nextSong ?: "No song queued"
+            } else {
+                upNextSongTitle.text = "No songs queued"
+                Toast.makeText(this, "No songs queued", Toast.LENGTH_SHORT).show()
+            }
             newCurrentSong(it)
 
         }
