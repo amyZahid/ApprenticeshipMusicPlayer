@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
 class MusicListAdapter(private val musicItemsList: ArrayList<AudioModel>, private val clickListener: (Int) -> Unit) : RecyclerView.Adapter<MusicListAdapter.ViewHolder>() {
@@ -24,6 +25,10 @@ class MusicListAdapter(private val musicItemsList: ArrayList<AudioModel>, privat
         holder.songTitleTextView.text = songItemViewModel.songName
         holder.songArtistTextView.text = songItemViewModel.songArtist
         holder.playSongClickableArea.setOnClickListener {
+            clickListener(position)
+        }
+
+        holder.addToPlaylistIcon.setOnClickListener {
             clickListener(position)
         }
     }
