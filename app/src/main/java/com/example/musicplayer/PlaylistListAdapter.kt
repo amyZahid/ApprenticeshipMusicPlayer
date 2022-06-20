@@ -9,7 +9,10 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 
-class PlaylistListAdapter(private val playlistList: ArrayList<PlaylistModel>, private val clickListener: (Int) -> Unit) : RecyclerView.Adapter<PlaylistListAdapter.ViewHolder>() {
+class PlaylistListAdapter(private val playlistList: ArrayList<PlaylistModel>) : RecyclerView.Adapter<PlaylistListAdapter.ViewHolder>() {
+
+    var onItemClick: ((Int) -> Unit)? = null
+    var onItemLongClick: ((Int) -> Unit)?= null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -25,7 +28,11 @@ class PlaylistListAdapter(private val playlistList: ArrayList<PlaylistModel>, pr
         holder.playlistNameTextView.text = playlistViewModel.playlistName
         holder.playlistCountTextView.text = playlistViewModel.songList.size.toString()
         holder.playlistClickableArea.setOnClickListener {
-            clickListener(position)
+            onItemClick?.invoke(position)
+        }
+        holder.playlistClickableArea.setOnLongClickListener {
+            onItemLongClick?.invoke(position)
+            true
         }
     }
 

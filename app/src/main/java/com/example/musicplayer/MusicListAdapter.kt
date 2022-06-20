@@ -9,7 +9,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
-class MusicListAdapter(private val musicItemsList: ArrayList<AudioModel>, private val clickListener: (Int) -> Unit) : RecyclerView.Adapter<MusicListAdapter.ViewHolder>() {
+class MusicListAdapter(private val musicItemsList: ArrayList<AudioModel>) : RecyclerView.Adapter<MusicListAdapter.ViewHolder>() {
+
+    var onItemClick: ((Int) -> Unit)? = null
+    var onItemLongClick: ((AudioModel) -> Unit)?= null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -25,11 +28,11 @@ class MusicListAdapter(private val musicItemsList: ArrayList<AudioModel>, privat
         holder.songTitleTextView.text = songItemViewModel.songName
         holder.songArtistTextView.text = songItemViewModel.songArtist
         holder.playSongClickableArea.setOnClickListener {
-            clickListener(position)
+            onItemClick?.invoke(position)
         }
-
-        holder.addToPlaylistIcon.setOnClickListener {
-            clickListener(position)
+        holder.playSongClickableArea.setOnLongClickListener {
+            onItemLongClick?.invoke(songItemViewModel)
+            true
         }
     }
 
@@ -39,9 +42,9 @@ class MusicListAdapter(private val musicItemsList: ArrayList<AudioModel>, privat
 
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
         val playSongClickableArea : LinearLayout = itemView.findViewById(R.id.playSongClickableArea)
-        val addToPlaylistIcon : ImageView = itemView.findViewById(R.id.addToPlaylistIcon)
         val songTitleTextView : TextView = itemView.findViewById(R.id.songTitleTextView)
         val songArtistTextView : TextView = itemView.findViewById(R.id.songArtistTextView)
+
     }
 
 }

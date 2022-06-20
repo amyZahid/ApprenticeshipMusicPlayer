@@ -57,6 +57,9 @@ class MainActivity : AppCompatActivity() {
 
         songListViewModel.updateSongList(songList)
 
+        val playListlist : ArrayList<PlaylistModel> = ArrayList()
+        songListViewModel.updatePlaylists(playListlist)
+
         val musicFragment = MusicFragment()
         val playFragment = PlayFragment()
         val searchFragment = SearchFragment()
