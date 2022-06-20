@@ -37,9 +37,10 @@
                 app:layout_constraintStart_toStartOf="parent"/>
 
             <ImageView
+                android:id="@+id/addPlaylistButton"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icon_chevron_right"
+                android:src="@drawable/icon_music_add"
                 app:layout_constraintTop_toTopOf="@id/playlistTitleTextView"
                 app:layout_constraintBottom_toBottomOf="@id/playlistTitleTextView"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -50,6 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:visibility="gone"
                 android:text="Your playlists will appear here once you've made some!!"
                 android:textColor="@color/text_white"
                 android:textSize="20dp"

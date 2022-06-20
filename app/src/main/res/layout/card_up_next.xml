@@ -41,6 +41,8 @@
                 android:text="No Songs Queued"
                 android:textSize="15sp"
                 android:textStyle="bold"
+                android:maxLines="1"
+                android:ellipsize="end"
                 app:layout_constraintTop_toBottomOf="@id/upNextTitleTextView"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/upNextPlayNextIcon"/>

@@ -10,10 +10,15 @@ class SongListViewModel : ViewModel() {
     var queuedSongsLiveData = MutableLiveData<ArrayList<AudioModel>>()
     var isPlaying = MutableLiveData<Boolean>()
     var shuffleActivated : Boolean = false
+    var playlists = MutableLiveData<ArrayList<PlaylistModel>>()
     var shuffledQueue = MutableLiveData<ArrayList<AudioModel>>()
 
     fun updateSongList(songList : ArrayList<AudioModel>) {
         songListLiveData.value = songList
+    }
+
+    fun updatePlaylists(playlistList : ArrayList<PlaylistModel>) {
+        playlists.value = playlistList
     }
 
 }
