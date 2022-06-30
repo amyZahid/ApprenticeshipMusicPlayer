@@ -19,11 +19,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/songInfoCard">
 
-        <ImageView
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/srgt_pepper_practice"
-            android:scaleType="centerCrop"/>
+            android:background="@color/background_black"
+            android:scaleType="centerCrop"
+            android:textSize="30sp"
+            android:text="No Album Cover Found"
+            android:textAlignment="center"
+            android:textColor="@color/text_white" />
 
     </com.google.android.material.card.MaterialCardView>
 

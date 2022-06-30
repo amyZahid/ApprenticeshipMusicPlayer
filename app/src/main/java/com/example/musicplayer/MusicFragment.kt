@@ -86,6 +86,8 @@ class MusicFragment : Fragment() {
             songListView.isVisible = true
             songListView.adapter = adapter
             noSongsTextView.isVisible = false
+        } else {
+            noSongsTextView.isVisible = true
         }
     }
 
